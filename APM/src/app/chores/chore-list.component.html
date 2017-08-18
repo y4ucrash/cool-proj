@@ -1,0 +1,53 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading' *ngIf='!chores && chores.length'>
+        {{noChoresTitle}}
+    </div>
+    <div class='panel-heading' *ngIf='chores && chores.length'>
+        {{regularTitle}}
+    </div>
+    <div class='panel-body'>
+       <div class='row'>
+            <div class='col-md-2'>Filter by chore name:</div>
+            <div class="col-md-4">
+                <input type="text"
+                [(ngModel)]='listFilter'/>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-6'>
+                <h3>Filter: {{listFilter}}</h3>
+            </div>
+        <div class="col-md-8">
+            <button class="btn btn-primary" (click)="computeTotals()">
+                Compute Totals
+            </button>
+        </div>
+        </div>
+
+        <table class='table' id='myTable' *ngFor='let kid of kids'>
+            <thead>
+                <tr>
+                    <th>Kid Name</th>
+                    <th>Chore name</th>
+                    <th>Chore worth</th>
+                    <th>Chore done?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let chore of filteredChores'>
+                    <td>{{kid.kidName}}</td>
+                    <td>{{chore.choreName}}</td>
+                    <td>{{chore.choreWorth | currency:'USD':true:'1.2-2'}}</td>
+                    <td>
+                        <input type="checkbox" class="toggle-button" />
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot >
+                <td></td>
+                <td></td>
+            </tfoot>
+        </table>
+
+    </div>
+</div>
